@@ -10,7 +10,7 @@ class PaymentResponseException extends Exception {
   /** @var int */
   private $srCode;
 
-  public function __construct (int $prCode, int $srCode = 0, string $message = "", Exception $previous = null) {
+  public function __construct ($prCode, $srCode = null, $message = null, Exception $previous = null) {
     $this->prCode = $prCode;
     $this->srCode = $srCode;
 
@@ -20,14 +20,14 @@ class PaymentResponseException extends Exception {
   /**
    * @return int
    */
-  public function getPrCode (): int {
+  public function getPrCode () {
     return $this->prCode;
   }
 
   /**
    * @return int
    */
-  public function getSrCode (): int {
+  public function getSrCode () {
     return $this->srCode;
   }
 }

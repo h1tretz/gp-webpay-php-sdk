@@ -18,7 +18,7 @@ class Api {
    * @param $webPayUrl
    * @param Signer $signer
    */
-  public function __construct (string $merchantNumber, string $webPayUrl, Signer $signer) {
+  public function __construct ($merchantNumber, $webPayUrl, Signer $signer) {
     $this->merchantNumber = $merchantNumber;
     $this->webPayUrl = $webPayUrl;
     $this->signer = $signer;
