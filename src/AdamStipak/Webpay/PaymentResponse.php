@@ -23,7 +23,7 @@ class PaymentResponse {
    * @param string $digest
    * @param string $digest1
    */
-  public function __construct (string $operation, string $ordernumber, string $merordernum = null, int $prcode, int $srcode, string $resulttext, string $digest, string $digest1, string $md = null) {
+  public function __construct ($operation, $ordernumber, $merordernum = null, $prcode, $srcode, $resulttext, $digest, $digest1, $md = null) {
     $this->params['operation'] = $operation;
     $this->params['ordermumber'] = $ordernumber;
     if ($merordernum !== null) {
@@ -42,28 +42,28 @@ class PaymentResponse {
   /**
    * @return array
    */
-  public function getParams (): array {
+  public function getParams () {
     return $this->params;
   }
 
   /**
    * @return mixed
    */
-  public function getDigest (): string {
+  public function getDigest () {
     return $this->digest;
   }
 
   /**
    * @return bool
    */
-  public function hasError (): bool {
+  public function hasError () {
     return (bool) $this->params['prcode'] || (bool) $this->params['srcode'];
   }
 
   /**
    * @return string
    */
-  public function getDigest1 (): string {
+  public function getDigest1 () {
     return $this->digest1;
   }
 }
