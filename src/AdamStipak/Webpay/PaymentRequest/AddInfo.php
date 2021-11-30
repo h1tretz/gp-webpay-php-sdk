@@ -2,7 +2,7 @@
 
 namespace AdamStipak\Webpay\PaymentRequest;
 
-use Spatie\ArrayToXml\ArrayToXml;
+use AdamStipak\Webpay\ArrayToXml;
 
 class AddInfo
 {
