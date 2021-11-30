@@ -1,59 +1,64 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace AdamStipak\Webpay\PaymentRequest;
 
 use Spatie\ArrayToXml\ArrayToXml;
 
-class AddInfo {
+class AddInfo
+{
 
-  /**
-   * @var array
-   */
-  private $values;
+    /**
+     * @var array
+     */
+    private $values;
 
-  /**
-   * @var string
-   */
-  private $schema;
+    /**
+     * @var string
+     */
+    private $schema;
 
-  public function __construct (string $schema, array $values) {
-    $this->schema = $schema;
-    $this->values = $values;
-    $this->validate();
-  }
-
-  private function validate () {
-    $dom = new \DOMDocument;
-    $dom->loadXML($this->toXml());
-
-    libxml_use_internal_errors(true);
-    if (!$dom->schemaValidateSource($this->schema)) {
-      $errors = [];
-      foreach (libxml_get_errors() as $xmlError) {
-        $errors[] = $xmlError->message;
-      }
-
-      throw new AddInfoException("Validation errors: " . implode(' | ', $errors));
+    public function __construct($schema, $values)
+    {
+        $this->schema = $schema;
+        $this->values = $values;
+        $this->validate();
     }
-    libxml_use_internal_errors(false);
-  }
 
-  public function toXml (): string {
-    return trim(ArrayToXml::convert(
-      $this->values, [
-        'rootElementName' => 'additionalInfoRequest',
-        '_attributes'     => [
-          'xmlns' => "http://gpe.cz/gpwebpay/additionalInfo/request",
-        ],
-      ]
-    ));
-  }
+    private function validate()
+    {
+        $dom = new \DOMDocument;
+        $dom->loadXML($this->toXml());
 
-  public static function createMinimalValues (string $version = '4.0'): array {
-    return [
-      '_attributes' => [
-        'version' => $version,
-      ],
-    ];
-  }
+        libxml_use_internal_errors(true);
+        if (!$dom->schemaValidateSource($this->schema)) {
+            $errors = [];
+            foreach (libxml_get_errors() as $xmlError) {
+                $errors[] = $xmlError->message;
+            }
+            throw new AddInfoException("Validation errors: " . implode(' | ', $errors));
+        }
+        libxml_use_internal_errors(false);
+    }
+
+    public function toXml()
+    {
+        return trim(ArrayToXml::convert(
+            $this->values, [
+                'rootElementName' => 'additionalInfoRequest',
+                '_attributes' => [
+                    'version' => '4.0',
+                    'xmlns' => "http://gpe.cz/gpwebpay/additionalInfo/request",
+                ],
+            ]
+        ));
+    }
+
+    public static function createMinimalValues($version = null)
+    {
+        return [
+            '_attributes' => [
+                'version' => $version ? $version : '4.0',
+            ],
+        ];
+    }
 }

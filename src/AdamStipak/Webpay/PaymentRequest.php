@@ -32,14 +32,14 @@ class PaymentRequest {
    * @param string|null $md Any merchant data.
    */
   public function __construct (
-    int $orderNumber,
-    float $amount,
-    int $currency,
-    int $depositFlag,
-    string $url,
-    string $merOrderNumber = null,
-    string $md = null,
-    AddInfo $addInfo = null
+    $orderNumber,
+    $amount,
+    $currency,
+    $depositFlag,
+    $url,
+    $merOrderNumber = null,
+    $md = null,
+    $addInfo = null
   ) {
     $this->params['MERCHANTNUMBER'] = "";
     $this->params['OPERATION'] = 'CREATE_ORDER';
@@ -77,7 +77,7 @@ class PaymentRequest {
    * Gives You all Request params
    * @return array
    */
-  public function getParams (): array {
+  public function getParams () {
     return $this->params;
   }
 

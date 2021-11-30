@@ -28,7 +28,7 @@ class Api {
    * @param PaymentRequest $request
    * @return string
    */
-  public function createPaymentRequestUrl (PaymentRequest $request): string {
+  public function createPaymentRequestUrl (PaymentRequest $request) {
     // build request URL based on PaymentRequest
     $paymentUrl = $this->webPayUrl . '?' . http_build_query($this->createPaymentParam($request));
 
@@ -39,7 +39,7 @@ class Api {
    * @param \AdamStipak\Webpay\PaymentRequest $request
    * @return array
    */
-  public function createPaymentParam (PaymentRequest $request): array {
+  public function createPaymentParam (PaymentRequest $request) {
     // digest request
     $request->setMerchantNumber($this->merchantNumber);
     $params = $request->getParams();
