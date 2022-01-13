@@ -15,11 +15,10 @@
     "psr-4": { "AdamStipak\\Webpay\\": "src/AdamStipak/Webpay" }
   },
   "require": {
-    "php": "~7.4 || ~8.0",
+    "php": "5.6.31",
     "ext-openssl": "*",
     "ext-dom": "*",
-    "ext-libxml": "*",
-    "spatie/array-to-xml": "^2.16"
+    "ext-libxml": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "~9.5"
